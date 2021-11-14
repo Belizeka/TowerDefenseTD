@@ -1,0 +1,26 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
+public class GameOver : MonoBehaviour
+{
+	public Text RoundsText;
+    public Text PointsText;
+
+    private void OnEnable()
+    {
+        RoundsText.text = "Rounds: " + Player.Rounds.ToString();
+        PointsText.text = "Points: " + Player.Points.ToString();
+    }
+    public void Retry()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void Menu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+}
