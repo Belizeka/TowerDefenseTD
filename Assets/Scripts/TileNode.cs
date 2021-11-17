@@ -41,7 +41,7 @@ public class TileNode : MonoBehaviour
 
         if (turret != null)
         {
-            buildManager.SelectNode(this);
+            //buildManager.SelectNode(this);
             return;
         }
 
@@ -50,6 +50,12 @@ public class TileNode : MonoBehaviour
   
         BuildTurret(buildManager.GetTurretToBuild());
     }
+
+	//public void TakeControl()
+	//{
+
+	//}
+
 
     void BuildTurret(TurretBase blueprint)
     {

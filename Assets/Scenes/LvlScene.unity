@@ -2373,16 +2373,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waves:
   - enemy: {fileID: 6560929339640429938, guid: 1c6938906b008524daadad91c9a223e5, type: 3}
-    count: 5
-    rate: 2
-  - enemy: {fileID: 2758993367874085755, guid: 86e9501866248ef49b26b6b42961cf38, type: 3}
-    count: 3
-    rate: 1
-  - enemy: {fileID: 3722514251988969376, guid: 98956cabf457838418bdca71c5ccdefc, type: 3}
-    count: 5
+    count: 200
     rate: 1
   spawnPoint: {fileID: 1578128490}
-  timeBetweenWaves: 10
+  timeBetweenWaves: 30
   waveCountdownText: {fileID: 1980547976}
 --- !u!4 &511567136
 Transform:
@@ -2426,7 +2420,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startMoney: 400
-  startLives: 7
+  startLives: 1000000000
 --- !u!114 &511567139
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -32,4 +32,10 @@ public class NodeUI : MonoBehaviour
         BuildManager.instance.DeselectNode();
     }
 
+    //public void Control()
+    //{
+    //    target.TakeControl();
+    //    BuildManager.instance.DeselectNode();
+    //}
+
 }

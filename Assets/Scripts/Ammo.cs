@@ -6,7 +6,7 @@ public class Ammo : MonoBehaviour
 {
 	private Transform target;
 
-	public float speed = 70f;
+    public float speed = 70f;
 
 	public int damage = 50;
 
@@ -16,6 +16,7 @@ public class Ammo : MonoBehaviour
 	{
 		target = _target;
 	}
+
 
     // Update is called once per frame
     void Update()
@@ -27,20 +28,21 @@ public class Ammo : MonoBehaviour
             //Destroy(gameObject);
             return;
         }
+ 
+            Vector3 dir = target.position - transform.position;
+            float distanceThisFrame = speed * Time.deltaTime;
 
-        Vector3 dir = target.position - transform.position;
-        float distanceThisFrame = speed * Time.deltaTime;
+            if (dir.magnitude <= distanceThisFrame)
+            {
+                HitTarget();
+                return;
+            }
 
-        if (dir.magnitude <= distanceThisFrame)
-        {
-            HitTarget();
-            return;
-        }
-
-        transform.Translate(dir.normalized * distanceThisFrame, Space.World);
-        transform.LookAt(target);
+            transform.Translate(dir.normalized * distanceThisFrame, Space.World);
+            transform.LookAt(target);
 
     }
+
 
     void HitTarget()
     {

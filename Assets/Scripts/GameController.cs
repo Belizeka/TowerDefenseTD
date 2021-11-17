@@ -30,6 +30,27 @@ public class GameController : MonoBehaviour
 			WinLevel();
 		}
 
+		if (Input.GetMouseButtonDown(0))
+		{
+			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			RaycastHit hit;
+			if (Physics.Raycast(ray, out hit))
+			{
+				if (hit.transform.tag == "Tower" && hit.collider.gameObject.GetComponent<TurretControl>().Control == false)
+				{
+                   hit.collider.gameObject.GetComponent<TurretControl>().Control = true;
+					Debug.Log("Control = On");
+				}
+
+				else if (hit.transform.tag == "Tower" && hit.collider.gameObject.GetComponent<TurretControl>().Control == true)
+				{
+					hit.collider.gameObject.GetComponent<TurretControl>().Control = false;
+					Debug.Log("Control = Off");
+				}
+			}
+		}
+
+
 	}
 
 	void EndGame()

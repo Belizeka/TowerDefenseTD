@@ -17,14 +17,20 @@ public class TurretControl : MonoBehaviour
 	public string enemyTag = "Enemy";
 
 	public Transform partToRotate;
-	public float turnSpeed = 10f;
+	public float turnSpeed = 300f;
 
 	public Transform firePoint;
 
+	public bool Control = false;
+
+	Camera _camera = null;
+
+	Vector3 dir;
 
 	// Start is called before the first frame update
 	void Start()
     {
+		_camera = Camera.main;
 		InvokeRepeating("UpdateTarget", 0f, 0.5f);
 	}
 
@@ -58,20 +64,44 @@ public class TurretControl : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if (target == null)
-		{		
-			return;
-		}
-		LockOnTarget();
-
-		if (fireCountdown <= 0f)
+        if (target == null)
+        {
+            return;
+        }
+        if (!Control)
 		{
-			Shoot();
-			fireCountdown = 1f / fireRate;
-		}
+			LockOnTarget();
+			if (fireCountdown <= 0f)
+			{
+				Shoot();
+				fireCountdown = 1f / fireRate;
+			}
 
-		fireCountdown -= Time.deltaTime;
+			fireCountdown -= Time.deltaTime;
+		}
+		else if (Control)
+		{
+			Rotateturret();
+            if(Input.GetMouseButtonDown(1))
+			{
+				UpdateTarget();
+				Shoot();
+				Debug.Log("Shoot on enemy");
+			}
+		}
+		
 	}
+
+	void Rotateturret()
+	{
+        Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
+		Vector3 dir = ray.direction;
+        Quaternion lookRotation = Quaternion.LookRotation(dir);
+        Vector3 rotation = Quaternion.Lerp(partToRotate.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
+        partToRotate.rotation = Quaternion.Euler(0f, rotation.y, rotation.z);
+
+    }
+
 
 	void LockOnTarget()
 	{
@@ -99,6 +129,7 @@ public class TurretControl : MonoBehaviour
 		//if (bullet != null)
 		//	bullet.Seek(target);
 	}
+
 
 
 	void OnDrawGizmosSelected()
